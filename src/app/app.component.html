@@ -1,0 +1,25 @@
+<!-- app.component.html -->
+<div class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-4">Link Preview Demo</h1>
+  
+  <input
+    class="w-full p-2 border rounded mb-4"
+    type="text"
+    placeholder="Paste a URL here"
+    (input)="onInputChange($event)"
+  />
+
+  <div *ngIf="loading" class="text-center">
+    <p>Loading previews...</p>
+  </div>
+
+  <div *ngFor="let item of previews" class="border rounded p-4 mb-4">
+    <h2 class="text-xl font-semibold">{{ item.url }}</h2>
+    <div *ngIf="item.preview" class="mt-2">
+      <h3 class="text-lg font-semibold">{{ item.preview.title }}</h3>
+      <p class="text-gray-600">{{ item.preview.description }}</p>
+      <img *ngIf="item.preview.images && item.preview.images.length" [src]="item.preview.images[0]" alt="Preview image" class="mt-2 max-w-full h-auto">
+    </div>
+    <p *ngIf="!item.preview" class="text-red-500">Failed to load preview</p>
+  </div>
+</div>
